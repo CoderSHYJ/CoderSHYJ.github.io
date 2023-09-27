@@ -15,5 +15,10 @@ npm run serve
 npm run build
 ```
 
+### Push
+```
+git subtree push --prefix dist master pages
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
