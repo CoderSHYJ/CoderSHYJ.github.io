@@ -1,10 +1,13 @@
 <template>
-  <nav>
-    <router-link to="/project">List</router-link>
-  </nav>
   <div class="view">
-    <router-view class="my-router-view"/>
+    <nav>
+      <router-link to="/project">List</router-link>
+    </nav>
+    <div class="router-view">
+      <router-view/>
+    </div>
   </div>
+
 
 </template>
 
@@ -16,8 +19,7 @@ export default {
 
 <style scoped>
 nav {
-  background-color: #ffffff;
-  color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0);
   padding: 10px;
   font-size: 20px;
 }
@@ -28,10 +30,12 @@ nav a {
 }
 
 .view {
-  padding: 0 30px;
+  background-color: rgb(193, 219, 239);
 }
 
-.my-router-view {
-  width: 100%; /* 设置宽度为100% */
+.router-view {
+  padding: 10px 10px;
+  background-color: rgb(247, 247, 247);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>

@@ -1,19 +1,23 @@
 <template>
-  <button @click="restartGame">Start</button>
-  <div>score: {{ snakeLength - 1 }}</div>
-  <div id="game-board">
-    <div v-for="segment in snake" :key="segment.id" class="snake"
-         :style="{ left: segment.x * 20 + 'px', top: segment.y * 20 + 'px' }"></div>
-    <div v-if="food" class="food" :style="{ left: food.x * 20 + 'px', top: food.y * 20 + 'px' }"></div>
-  </div>
-  <div class="direction-buttons">
-    <div class="vertical-buttons">
-      <button @click="move('up')">Up</button>
-      <div class="horizontal-buttons">
-        <button @click="move('left')">Left</button>
-        <button @click="move('right')">Right</button>
+  <div class="components">
+    <h2>Greedy Snake</h2>
+    <div class="score-board">
+      <div class="label">score</div>
+      <div class="score">{{ snakeLength - 1 }}</div>
+    </div>
+    <div id="game-board">
+      <div v-for="segment in snake" :key="segment.id" class="snake"
+           :style="{ left: segment.x * 10 + 'px', top: segment.y * 10 + 'px' }"></div>
+      <div v-if="food" class="food" :style="{ left: food.x * 10 + 'px', top: food.y * 10 + 'px' }"></div>
+    </div>
+    <button @click="restartGame" class="start-button">Start</button>
+    <div class="horizontal-buttons">
+      <button @click="move('left')">L</button>
+      <div class="vertical-buttons">
+        <button @click="move('up')">U</button>
+        <button @click="move('down')">D</button>
       </div>
-      <button @click="move('down')">Down</button>
+      <button @click="move('right')">R</button>
     </div>
   </div>
 </template>
@@ -54,6 +58,8 @@ export default {
       if (head.x === this.food.x && head.y === this.food.y) {
         this.snakeLength++;
         this.food = this.generateFood();
+        clearInterval(this.gameInterval);
+        this.gameInterval = setInterval(this.updateGame, 250 - this.snakeLength * 10);
       }
       if (this.snake.length > this.snakeLength) {
         this.snake.pop();
@@ -99,9 +105,10 @@ export default {
       return false;
     },
     generateFood() {
+      let x, y;
       while (1) {
-        let x = Math.floor(Math.random() * 20);
-        let y = Math.floor(Math.random() * 20);
+        x = Math.floor(Math.random() * 20);
+        y = Math.floor(Math.random() * 20);
         let flag = false;
         for (let segment in this.snake) {
           if (x === segment.x && y === segment.y) {
@@ -114,11 +121,11 @@ export default {
         }
       }
       return {
-        x: Math.floor(Math.random() * 20),
-        y: Math.floor(Math.random() * 20)
+        x, y
       };
     },
     restartGame() {
+      clearInterval(this.gameInterval);
       this.snake = [{x: 10, y: 10}];
       this.snakeLength = 1;
       this.food = this.generateFood();
@@ -131,32 +138,37 @@ export default {
 
 <style scoped>
 #game-board {
-  width: 420px;
-  height: 420px;
+  width: 210px;
+  height: 210px;
   border: 2px solid #000;
   position: relative;
   margin: 0 auto;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
 }
 
 .snake {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   background-color: green;
   position: absolute;
 }
 
 .food {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   background-color: red;
   position: absolute;
 }
 
-.direction-buttons {
+.components {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 2px solid #000;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
 }
 
 .vertical-buttons {
@@ -175,12 +187,72 @@ button {
   margin: 10px;
   padding: 10px 20px;
   font-size: 18px;
-  border: none;
   background-color: #ddd;
+  border: 2px solid #000;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
 }
 
 button:hover {
   background-color: #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.start-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #37e1ff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 鼠标悬停状态 */
+.start-button:hover {
+  background-color: #0cb6ff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 按下状态 */
+.start-button:active {
+  background-color: #0d9aff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 禁用状态 */
+.start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.score-board {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 成绩样式 */
+.score-board .score {
+  margin-bottom: 5px;
+}
+
+/* 提示文字样式 */
+.score-board .label {
+  font-size: 14px;
+  color: #666;
 }
 </style>
