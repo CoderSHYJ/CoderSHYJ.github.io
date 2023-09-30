@@ -16,24 +16,24 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     },
     {
-        path: '/project',
-        name: 'project',
-        component: () => import('../views/ProjectView.vue'),
+        path: '/whimsy',
+        name: 'whimsy',
+        component: () => import('../views/WhimsyView.vue'),
         children: [
             {
                 path: '',
                 name: 'list',
-                component: () => import('../views/project/ProjectList'),
+                component: () => import('../views/whimsy/WhimsyList'),
             },
             {
                 path: 'GreedySnake',
                 name: 'GreedySnake',
-                component: () => import('../views/project/GreedySnake'),
+                component: () => import('../views/whimsy/GreedySnake'),
             },
             {
                 path: 'test',
                 name: 'test',
-                component: () => import('../views/project/Test'),
+                component: () => import('../views/whimsy/Test'),
             }
         ]
     }

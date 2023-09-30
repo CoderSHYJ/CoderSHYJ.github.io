@@ -1,13 +1,16 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/project">Project</router-link>
+    <router-link to="/">Home</router-link>
+    |
+    <router-link to="/about">About</router-link>
+    |
+    <router-link to="/whimsy">Whimsy</router-link>
+    |
   </nav>
   <router-view/>
 </template>
 
-<style>
+<style scoped>
 
 nav {
   background-color: #333;
@@ -23,5 +26,9 @@ nav a {
 
 nav a.router-link-active {
   color: #00b2ff;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

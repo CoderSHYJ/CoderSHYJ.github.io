@@ -10,7 +10,7 @@
            :style="{ left: segment.x * 10 + 'px', top: segment.y * 10 + 'px' }"></div>
       <div v-if="food" class="food" :style="{ left: food.x * 10 + 'px', top: food.y * 10 + 'px' }"></div>
     </div>
-    <button @click="restartGame" class="start-button">Start</button>
+    <button @click="restartGame" class="start-button">{{ buttonText }}</button>
     <div class="horizontal-buttons">
       <button @click="move('left')">L</button>
       <div class="vertical-buttons">
@@ -31,6 +31,7 @@ export default {
       snake: [{x: 10, y: 10}],
       snakeLength: 1,
       food: '',
+      buttonText: 'Start',
     };
   },
   mounted() {
@@ -38,17 +39,29 @@ export default {
   },
   methods: {
     move(direction) {
+      if (this.direction === "up" && direction === "down" && this.snakeLength !== 1) {
+        return;
+      }
+      if (this.direction === "down" && direction === "up" && this.snakeLength !== 1) {
+        return;
+      }
+      if (this.direction === "right" && direction === "left" && this.snakeLength !== 1) {
+        return;
+      }
+      if (this.direction === "left" && direction === "right" && this.snakeLength !== 1) {
+        return;
+      }
       this.direction = direction;
     },
 
     handleKeyDown(event) {
-      if (event.key === "ArrowUp" && this.direction !== "down") {
+      if (event.key === "ArrowUp" && (this.direction !== "down" || this.snakeLength === 1)) {
         this.direction = "up";
-      } else if (event.key === "ArrowDown" && this.direction !== "up") {
+      } else if (event.key === "ArrowDown" && (this.direction !== "up" || this.snakeLength === 1)) {
         this.direction = "down";
-      } else if (event.key === "ArrowLeft" && this.direction !== "right") {
+      } else if (event.key === "ArrowLeft" && (this.direction !== "right" || this.snakeLength === 1)) {
         this.direction = "left";
-      } else if (event.key === "ArrowRight" && this.direction !== "left") {
+      } else if (event.key === "ArrowRight" && (this.direction !== "left" || this.snakeLength === 1)) {
         this.direction = "right";
       }
     },
@@ -59,16 +72,15 @@ export default {
         this.snakeLength++;
         this.food = this.generateFood();
         clearInterval(this.gameInterval);
-        this.gameInterval = setInterval(this.updateGame, 250 - this.snakeLength * 10);
+        this.gameInterval = setInterval(this.updateGame, 250 * Math.pow(0.95, this.snakeLength));
       }
       if (this.snake.length > this.snakeLength) {
         this.snake.pop();
       }
       if (this.isSnakeDead()) {
         clearInterval(this.gameInterval);
-        alert('游戏结束！');
-        this.snake = [{x: 10, y: 10}];
-        this.food = '';
+        this.buttonText = 'Try Again';
+        //alert('游戏结束！');
       }
     },
 
@@ -107,11 +119,11 @@ export default {
     generateFood() {
       let x, y;
       while (1) {
-        x = Math.floor(Math.random() * 20);
-        y = Math.floor(Math.random() * 20);
+        x = Math.floor(Math.random() * 21);
+        y = Math.floor(Math.random() * 21);
         let flag = false;
-        for (let segment in this.snake) {
-          if (x === segment.x && y === segment.y) {
+        for (let i = 0; i < this.snake.length; i++) {
+          if (x === this.snake[i].x && y === this.snake[i].y) {
             flag = true;
             break;
           }
@@ -131,6 +143,7 @@ export default {
       this.food = this.generateFood();
       this.direction = 'right';
       this.gameInterval = setInterval(this.updateGame, 250);
+      this.buttonText = 'Restart';
     },
   }
 }
@@ -151,6 +164,7 @@ export default {
   width: 10px;
   height: 10px;
   background-color: green;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
   position: absolute;
 }
 
@@ -158,6 +172,7 @@ export default {
   width: 10px;
   height: 10px;
   background-color: red;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
   position: absolute;
 }
 
