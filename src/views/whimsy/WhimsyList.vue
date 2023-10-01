@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="item in itemList" :key="item.id">
-        <router-link :to="'/whimsy/' + item.name">{{ item.name }}</router-link>
+        <router-link :to="'/whimsy/' + item.name"  @click="childClick">{{ item.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -18,6 +18,13 @@ export default {
         { id: 1, name: 'GreedySnake' },
         { id: 2, name: 'Item 3' }
       ]
+    }
+  },
+  methods: {
+    // 初始化
+    childClick(msg) {
+      console.log(1);
+      this.$parent.childText=msg;
     }
   }
 }

@@ -18,7 +18,7 @@ const routes = [
     {
         path: '/whimsy',
         name: 'whimsy',
-        component: () => import('../views/WhimsyView.vue'),
+        component: () => import('../views/WhimsyView'),
         children: [
             {
                 path: '',

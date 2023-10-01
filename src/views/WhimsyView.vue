@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <nav>
-      <router-link to="/whimsy">List</router-link>
+      <router-link to="/whimsy">List {{ childText }}</router-link>
     </nav>
     <div class="router-view">
       <router-view/>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  name: "ProjectView"
+  name: "ProjectView",
+  data() {
+    return {
+      childText: 'df',
+    };
+  },
 }
 </script>
 
@@ -29,6 +34,10 @@ nav a {
   color: #000000;
 }
 
+a {
+  text-decoration: none;
+}
+
 .view {
   background-color: rgb(193, 219, 239);
 }
@@ -36,6 +45,6 @@ nav a {
 .router-view {
   padding: 10px 10px;
   background-color: rgb(247, 247, 247);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
 }
 </style>
