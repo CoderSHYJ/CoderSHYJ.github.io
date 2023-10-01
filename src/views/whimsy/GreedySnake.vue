@@ -156,7 +156,7 @@ export default {
   border: 2px solid #000;
   position: relative;
   margin: 0 auto;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
   background-color: #ffffff;
 }
 
@@ -181,8 +181,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #000;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
 }
 
@@ -203,17 +203,20 @@ button {
   padding: 10px 20px;
   font-size: 18px;
   background-color: #ddd;
-  border: 2px solid #000;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
   border-radius: 6px;
+  border: 0 solid #000;
 }
 
 button:hover {
   background-color: #ccc;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
 }
-
+button:active {
+  background-color: #aaa;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
 .start-button {
   display: inline-block;
   padding: 12px 24px;
@@ -227,19 +230,19 @@ button:hover {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(5, 100, 100, 0.9);
 }
 
 /* 鼠标悬停状态 */
 .start-button:hover {
   background-color: #0cb6ff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(2, 20, 20, 0.9);
 }
 
 /* 按下状态 */
 .start-button:active {
   background-color: #0d9aff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* 禁用状态 */
@@ -257,7 +260,7 @@ button:hover {
   text-align: center;
   color: #333;
   margin-bottom: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
 /* 成绩样式 */
