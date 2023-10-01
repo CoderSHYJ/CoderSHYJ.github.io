@@ -32,10 +32,15 @@ export default {
       snakeLength: 1,
       food: '',
       buttonText: 'Start',
+      title: ' » GreedySnake',
     };
   },
-  mounted() {
+  created() {
     document.addEventListener("keydown", this.handleKeyDown);
+    this.$parent.$parent.$data.childText = this.title;
+  },
+  beforeDestroy() {
+    document.removeEventListener("keydown", this.handleKeyDown);
   },
   methods: {
     move(direction) {
