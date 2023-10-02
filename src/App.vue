@@ -8,6 +8,10 @@
     |
   </nav>
   <router-view/>
+  <footer class="page-end">
+    <p>Tech Platform: Vue.js, Github Pages</p>
+    <p>Source Code: <a href="https://github.com/CoderSHYJ/CoderSHYJ.github.io">Click Here</a></p>
+  </footer>
 </template>
 
 <style scoped>
@@ -25,10 +29,32 @@ nav a {
 }
 
 nav a.router-link-active {
-  color: #00b2ff;
+  color: #888888;
 }
 
 a {
   text-decoration: none;
+}
+
+.page-end {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #333;
+  color: #dddddd;
+  margin-top: 4px;
+  justify-content: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.page-end a {
+  color: #dddddd;
+  text-decoration: underline;
+}
+
+.page-end p {
+  margin: 8px;
+  font-size: 4px;
 }
 </style>

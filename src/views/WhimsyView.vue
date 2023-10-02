@@ -35,17 +35,18 @@ export default {
 
 <style scoped>
 nav {
-  background-color: rgba(193, 219, 239, 1);
   padding: 10px 0 10px 30px;
   font-size: 15px;
   font-weight: bold; /* 较粗的字体 */
   border-radius: 8px;
   margin: 4px 4px;
+  border: 2px solid #888888;
+  background: linear-gradient(to bottom, #dddddd 0%, #ffffff 20%, #ffffff 80%, #dddddd 100%) center;
 }
 
 nav a {
   font-weight: bold;
-  color: #0077ff;
+  color: #0066dd;
 }
 
 .router-view {

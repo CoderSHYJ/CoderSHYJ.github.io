@@ -46,11 +46,11 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #f0f0f0;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin: 10px;
   text-decoration: none;  /* 移除默认链接样式 */
   box-shadow: 0 0 4px rgba(5, 5, 5, 0.9);
+  background: linear-gradient(to bottom, rgb(205, 205, 205) 0%, rgba(240, 240, 240, 1) 10%, rgba(240, 240, 240, 1) 80%, rgba(255, 255, 255, 1) 100%) center;
 }
 
 .item-image {
